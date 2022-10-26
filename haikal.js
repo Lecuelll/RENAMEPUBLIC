@@ -4154,7 +4154,21 @@ dwhe = await getBuffer(`https://raku-web.herokuapp.com/api/bokep?apikey=RakuKeyT
 haikal.sendMessage(m.chat, { video: dwhe, mimetype: 'video/mp4', fileName: `${command}.mp4`, caption: `Nih Bokep Nya` }, { quoted:hw })
 }
 break
-
+case 'welcome': {
+if (!isCreator) return 
+if (!m.isGroup) return mess.group
+if (args.length < 1) return m.reply('ketik on untuk mengaktifkan\nketik off untuk menonaktifkan')
+if (args[0] === "on") {
+if (welcm) return m.reply('Sudah Aktif')
+wlcm.push(from)
+m.reply('Succes menyalakan welcome di group ini 🌷')
+} else if (args[0] === "off") {
+if (!welcm) return m.reply('Sudah Mati')
+let off = wlcm.indexOf(from)
+wlcm.splice(off, 1)
+m.reply('Succes mematikan welcome di group ini 🌷')
+} else {
+m.reply('on untuk mengaktifkan, off untuk menonaktifkan')
 
 case 'antilink': {
 if (!isCreator) return
@@ -4641,6 +4655,7 @@ linkgroup
  promote @user
  demote @user
  inspect
+ welcome on / off
  mute on / off
  getname
  translate
